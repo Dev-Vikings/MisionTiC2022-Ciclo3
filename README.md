@@ -3,4 +3,4 @@
 Santiago Blandon
 andres pinilla
 Julian Lopez - Backend
-Sebastian Fuentes - Scrum Master, Frontend
+Sebastian Fuentes - Scrum Master, Desarrollador Frontend
