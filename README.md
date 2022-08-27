@@ -1,9 +1,11 @@
 # MisionTiC 2022 - Ciclo 3
 
+## Integrantes
+
 Santiago Blandon - Backend
 
 
-Andres pinilla
+Andres Pinilla
 
 
 Julian Lopez - Backend
