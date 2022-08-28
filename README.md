@@ -5,7 +5,7 @@
 Santiago Blandon - Backend
 
 
-Andres Pinilla
+Andres Pinilla - Desarrollador / analista
 
 
 Julian Lopez - Backend
