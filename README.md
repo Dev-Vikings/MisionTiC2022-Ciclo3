@@ -1,5 +1,7 @@
 # MisionTiC 2022 - Ciclo 3
 
+Aplicativo web para la administracion de ingresos y egresos de la compañia.
+
 Proyecto desarrollado con Spring-Boot y PostgreSQL
 
 ## Integrantes
