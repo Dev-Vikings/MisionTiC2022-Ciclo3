@@ -1,31 +1,42 @@
 package com.example.demo.services;
 
 import com.example.demo.entities.Empresa;
+import com.example.demo.entities.ListEmpresas;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class EmpresaService {
-    Empresa empresa;
+//    Empresa empresa;
+    private ListEmpresas listEmpresa;
 
-    public Empresa nuevaempresa(String nombre, String direccion, Integer telefono, Integer NIT){
-        empresa=new Empresa(nombre,direccion,telefono,NIT);
-        return empresa;
+    public EmpresaService(){
+        listEmpresa=new ListEmpresas();
     }
 
-    public List<Empresa> getEmpresas(){
+    public ArrayList<Empresa> getEmpresas(){
+        return listEmpresa.getList();
+    }
+
+    public Empresa getEmpresa(int INT){
+
+        return listEmpresa.findEmpresa(INT);
+    }
+
+    public Empresa nuevaEmpresa(Empresa empresa){
+        if(listEmpresa.addEmpresa(empresa)){
+            return empresa;
+        }
         return null;
     }
 
-    public Empresa getEmpresa(String id){
-        return null;
+
+    public Empresa patchEmpresa(Empresa empresa){
+       return listEmpresa.updateEmpresa(empresa);
     }
 
-    public Empresa PatchEmpresa(String nombre, String direccion, Integer telefono, Integer NIT){
-        return null;
-    }
-
-    public boolean DeleteEmpresa(String id){
-        return false;
+    public Empresa deleteEmpresa(int NIT){
+    return listEmpresa.deleteEmpresa(listEmpresa.findEmpresa(NIT));
     }
 }
 

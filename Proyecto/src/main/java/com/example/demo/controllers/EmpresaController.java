@@ -4,41 +4,44 @@ import com.example.demo.entities.Empresa;
 import com.example.demo.services.EmpresaService;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.ArrayList;
+
 @RestController
 public class EmpresaController {
     EmpresaService service;
 
+    EmpresaController() {
+        service=new EmpresaService();
+    }
+
     @PostMapping("/enterprises")
-    //crear empresa
-    public Empresa setEmpresas(@PathVariable("nombre") String nombre, @PathVariable("direccion") String direccion,
-                               @PathVariable("telefono") Integer telefono, @PathVariable("NIT") Integer NIT){
-        service.nuevaempresa(nombre,direccion,telefono,NIT);
-        return service.getEmpresa(NIT.toString());
+    public Empresa postEmpresas(@RequestBody Empresa empresa){
+        return service.nuevaEmpresa(empresa);
     }
 
     @GetMapping("/enterprises")
     //consultar todas las empresas
-    public String  getEmpresas(){
-        return "GET";
+    public ArrayList<Empresa> getAllEmpresas(){
+        return service.getEmpresas();
     }
 
 
     @GetMapping("/enterprises/{id}")
     //consultar una empresa
-    public String getEmpresa(@PathVariable("id") String id){
-        return id.toString();
+    public Empresa getEmpresa(@PathVariable int id){
+        return service.getEmpresa(id);
     }
 
     @PatchMapping("/enterprises/{id}")
     //editar empresa
-    public String patchEmpresa(@PathVariable("id") String id){
-        return id.toString();
+    public Empresa patchEmpresa(@RequestBody Empresa empresa){
+        return service.patchEmpresa(empresa);
     }
 
     @DeleteMapping("/enterprises/{id}")
     //Borrar empresa
-    public String deleteEmpresa(@PathVariable("id") String id){
-        return id.toString();
+    public Empresa deleteEmpresa(@PathVariable int id){
+        return service.deleteEmpresa(id);
     }
 
 }
