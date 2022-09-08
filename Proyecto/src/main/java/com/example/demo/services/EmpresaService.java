@@ -22,29 +22,24 @@ public class EmpresaService {
     }
     public List<Empresa> getEmpresa(int nit){
             return this.repository.findById(nit);
-//        return this.repository.find;
     }
 
     public Empresa nuevaEmpresa(Empresa empresa){
-        return repository.save(empresa);
-//        if(listEmpresa.addEmpresa(empresa)){
-//            return empresa;
-//        }
-//        return null;
+
+        if (getEmpresa(empresa.getNit()).isEmpty()) {
+            return repository.save(empresa);
+        }
+        return null;
     }
 
 
     public Empresa patchEmpresa(Empresa empresaold, Empresa empresanew){
-        System.out.println(empresaold.toString());
-        System.out.println(empresanew.toString());
-
         empresaold.setNit(empresanew.getNit());
         empresaold.setNombre(empresanew.getNombre());
         empresaold.setDireccion(empresanew.getDireccion());
         empresaold.setTelefono(empresanew.getTelefono());
         return repository.save(empresaold);
 
-//        return listEmpresa.updateEmpresa(empresa);
     }
 
     public void deleteEmpresa(int nit){
