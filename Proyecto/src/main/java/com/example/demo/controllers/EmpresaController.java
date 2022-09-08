@@ -17,7 +17,7 @@ public class EmpresaController {
     }
 
     @PostMapping //Crear una empresa
-    public Empresa postEmpresas(@RequestBody Empresa empresa){
+    public Empresa newEmpresas(@RequestBody Empresa empresa){
         return service.nuevaEmpresa(empresa);
     }
 
