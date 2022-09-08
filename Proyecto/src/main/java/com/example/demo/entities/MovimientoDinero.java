@@ -1,15 +1,28 @@
 package com.example.demo.entities;
 
+import javax.persistence.*;
+import java.util.Objects;
 
+@Entity
+@Table(name = "movdinero")
 public class MovimientoDinero {
-    private float montoMovimiento;
-    private String concepto;
-    private String empleado;
 
-    public MovimientoDinero(float montoMovimiento, String concepto, String empleado) {
+    @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    private Integer id;
+    @Column(name = "monto",nullable = false)
+    private float montoMovimiento;
+    @Column(name = "concepto")
+    private String concepto;
+//    @Column(name = "empleado")
+//    private String empleado;
+
+    public MovimientoDinero(){}
+
+    public MovimientoDinero(Integer id, float montoMovimiento, String concepto) {
+        this.id = id;
         this.montoMovimiento = montoMovimiento;
         this.concepto = concepto;
-        this.empleado = empleado;
     }
 
     public float getMontoMovimiento() {
@@ -28,11 +41,33 @@ public class MovimientoDinero {
         this.concepto = concepto;
     }
 
-    public String getEmpleado() {
-        return empleado;
+    public long getId() {
+        return id;
     }
 
-    public void setEmpleado(String empleado) {
-        this.empleado = empleado;
+    public void setId(Integer id) {
+        this.id = id;
+    }
+
+    @Override
+    public String toString() {
+        return "MovimientoDinero{" +
+                "id=" + id +
+                ", montoMovimiento=" + montoMovimiento +
+                ", concepto='" + concepto + '\'' +
+                '}';
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        MovimientoDinero that = (MovimientoDinero) o;
+        return id == that.id && Float.compare(that.montoMovimiento, montoMovimiento) == 0;
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(id, montoMovimiento);
     }
 }

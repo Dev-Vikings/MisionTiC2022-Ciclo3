@@ -4,44 +4,57 @@ import com.example.demo.entities.Empresa;
 import com.example.demo.services.EmpresaService;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.ArrayList;
+import java.util.List;
+import java.util.Optional;
 
 @RestController
+@RequestMapping("/enterprises")
 public class EmpresaController {
     EmpresaService service;
 
-    EmpresaController() {
-        service=new EmpresaService();
+    EmpresaController(EmpresaService service) {
+        this.service=service;
     }
 
-    @PostMapping("/enterprises")
+    @PostMapping //Crear una empresa
     public Empresa postEmpresas(@RequestBody Empresa empresa){
         return service.nuevaEmpresa(empresa);
     }
 
-    @GetMapping("/enterprises")
-    //consultar todas las empresas
-    public ArrayList<Empresa> getAllEmpresas(){
+    @GetMapping //Consultar todas las empresas
+    public List<Empresa> getAllEmpresas(){
         return service.getEmpresas();
     }
 
+    @GetMapping("/{id}")  //consultar una por el NIT
+    public List<Empresa> getEmpresa(@PathVariable int id){
 
-    @GetMapping("/enterprises/{id}")
-    //consultar una empresa
-    public Empresa getEmpresa(@PathVariable int id){
         return service.getEmpresa(id);
+
     }
 
-    @PatchMapping("/enterprises/{id}")
-    //editar empresa
-    public Empresa patchEmpresa(@RequestBody Empresa empresa){
-        return service.patchEmpresa(empresa);
+    @PatchMapping("/{id}")
+    public Empresa patchEmpresa(@RequestBody Empresa empresanew, @PathVariable int id){
+        Empresa empresaold=service.getEmpresa(id).get(0);
+
+            return service.patchEmpresa(empresaold,empresanew);
+
     }
 
-    @DeleteMapping("/enterprises/{id}")
+    @DeleteMapping("/{id}") //Elimina una empresa utilizando el NIT
     //Borrar empresa
     public Empresa deleteEmpresa(@PathVariable int id){
-        return service.deleteEmpresa(id);
+        Empresa empresa=service.getEmpresa(id).get(0);
+
+        if(empresa!=null){
+            service.deleteEmpresa(id);
+                return empresa;
+            }
+
+
+        return null;
+
     }
+
 
 }
