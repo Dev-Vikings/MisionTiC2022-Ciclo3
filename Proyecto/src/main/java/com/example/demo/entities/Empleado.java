@@ -7,9 +7,8 @@ import java.util.Objects;
 @Table(name="empleado")
 public class Empleado {
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    private Integer id;
+    @Id @GeneratedValue(strategy = GenerationType.SEQUENCE)
+    private int id;
     @Column(name = "nombre",nullable = false)
     private String nombre;
     @Column(name = "correo")
@@ -24,8 +23,7 @@ public class Empleado {
 
     public Empleado(){}
 
-    public Empleado(Integer id, String nombre, String correo, String empresa, String rol, MovimientoDinero movdinero) {
-        this.id = id;
+    public Empleado(String nombre, String correo, String empresa, String rol, MovimientoDinero movdinero) {
         this.nombre = nombre;
         this.correo = correo;
         this.empresa = empresa;
@@ -65,13 +63,14 @@ public class Empleado {
         this.rol = rol;
     }
 
-    public long getId() {
+    public int getId() {
         return id;
     }
 
-    public void setId(Integer id) {
-        this.id = id;
-    }
+//    public void setId(Integer id) {
+//        this.id = id;
+//    }
+
 
     public MovimientoDinero getMovdinero() {
         return movdinero;
@@ -98,11 +97,11 @@ public class Empleado {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Empleado empleado = (Empleado) o;
-        return id == empleado.id && nombre.equals(empleado.nombre) && empresa.equals(empleado.empresa) && movdinero.equals(empleado.movdinero);
+        return id == empleado.id && nombre.equals(empleado.nombre) && empresa.equals(empleado.empresa)/* && movdinero.equals(empleado.movdinero)*/;
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, nombre, empresa, movdinero);
+        return Objects.hash(id, nombre, empresa/*, movdinero*/);
     }
 }

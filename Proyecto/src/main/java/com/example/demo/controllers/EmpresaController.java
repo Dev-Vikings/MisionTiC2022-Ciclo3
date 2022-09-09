@@ -35,9 +35,11 @@ public class EmpresaController {
 
     @PatchMapping("/{id}")
     public Empresa patchEmpresa(@RequestBody Empresa empresanew, @PathVariable int id){
-        Empresa empresaold=service.getEmpresa(id).get(0);
-
-            return service.patchEmpresa(empresaold,empresanew);
+        Empresa empresaOld=service.getEmpresa(id).get(0);
+        if(empresaOld!=null) {
+            return service.patchEmpresa(empresaOld, empresanew);
+        }
+        return null;
 
     }
 

@@ -16,18 +16,27 @@ public class MovimientoDineroController {
 
     @GetMapping
     public MovimientoDinero getMovimientoDinero(@PathVariable int id){
-        return null;
+        return service.getMovimientoDinero(id);
     }
     @PostMapping
     public MovimientoDinero newMovimientoDinero(@PathVariable int id,@RequestBody MovimientoDinero movimientoDinero){
-        return null;
+        return service.nuevoMovimientoDinero(movimientoDinero);
     }
     @PatchMapping
     public MovimientoDinero patchMovimientoDinero(@PathVariable int id,@RequestBody MovimientoDinero movimientoDinero){
+        MovimientoDinero movDineroOld=service.getMovimientoDinero(id);
+        if(movDineroOld!=null){
+            return service.patchMovimientoDinero(movDineroOld,movimientoDinero);
+        }
         return null;
     }
     @DeleteMapping
     public MovimientoDinero deleteMovimientoDinero(@PathVariable int id){
+        MovimientoDinero movimientoDinero=getMovimientoDinero(id);
+        if(movimientoDinero!=null){
+            service.deleteMovimientoDinero(movimientoDinero);
+            return movimientoDinero;
+        }
         return null;
     }
 }

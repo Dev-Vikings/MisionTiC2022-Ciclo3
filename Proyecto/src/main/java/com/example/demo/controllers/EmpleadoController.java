@@ -1,7 +1,6 @@
 package com.example.demo.controllers;
 
 import com.example.demo.entities.Empleado;
-import com.example.demo.entities.Empresa;
 import com.example.demo.services.EmpleadoService;
 import org.springframework.web.bind.annotation.*;
 
@@ -18,27 +17,35 @@ public class EmpleadoController {
 
     @PostMapping
     public Empleado newEmpleado(@RequestBody Empleado empleado){
-        return null;
+        return service.nuevoEmpleado(empleado);
     }
 
     @GetMapping
     public List<Empleado> getAllEmpleados(@RequestBody Empleado empleado){
-        return null;
+        return service.getEmpleados();
     }
 
     @GetMapping("/{id}")
     public Empleado getEmpleado(@PathVariable int id){
-        return null;
+        return service.getEmpleado(id);
     }
 
     @PatchMapping("/{id}")
-    public Empleado patchEmpleado(@PathVariable int id){
+    public Empleado patchEmpleado(@PathVariable int id,@RequestBody Empleado empleado){
+        Empleado empleadoOld=service.getEmpleado(id);
+        if(empleadoOld!=null){
+            return service.patchEmpleado(empleado, empleadoOld);
+        }
         return null;
     }
 
     @DeleteMapping("/{id}")
     public Empleado deleteEmpleado(@PathVariable int id){
-        return null;
-    }
+        Empleado empleado=getEmpleado(id);
+        if(empleado!=null){
+            service.deleteEmpleado(empleado);
+            return empleado;
+        }
+        return null;    }
 
 }

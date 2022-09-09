@@ -7,20 +7,19 @@ import java.util.Objects;
 @Table(name = "movdinero")
 public class MovimientoDinero {
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    private Integer id;
+    @Id @GeneratedValue(strategy = GenerationType.SEQUENCE)
+    private int id;
     @Column(name = "monto",nullable = false)
     private float montoMovimiento;
     @Column(name = "concepto")
     private String concepto;
+
 //    @Column(name = "empleado")
 //    private String empleado;
 
     public MovimientoDinero(){}
 
     public MovimientoDinero(Integer id, float montoMovimiento, String concepto) {
-        this.id = id;
         this.montoMovimiento = montoMovimiento;
         this.concepto = concepto;
     }
@@ -41,13 +40,13 @@ public class MovimientoDinero {
         this.concepto = concepto;
     }
 
-    public long getId() {
+    public int getId() {
         return id;
     }
 
-    public void setId(Integer id) {
-        this.id = id;
-    }
+//    public void setId(Integer id) {
+//        this.id = id;
+//    }
 
     @Override
     public String toString() {
