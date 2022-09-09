@@ -6,7 +6,9 @@ import java.util.Objects;
 @Entity
 @Table(name="empresa")
 public class Empresa {
-    @Id @GeneratedValue(strategy = GenerationType.SEQUENCE)
+    @Id @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "empresa")
+    @SequenceGenerator(name="empresa",sequenceName="DB_SEQUENCIA", allocationSize=1)
+
     private int id;
     @Column(name="nombre",nullable = false)
     private String nombre;

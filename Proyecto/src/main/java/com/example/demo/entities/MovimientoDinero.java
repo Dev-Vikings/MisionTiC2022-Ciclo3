@@ -7,21 +7,24 @@ import java.util.Objects;
 @Table(name = "movdinero")
 public class MovimientoDinero {
 
-    @Id @GeneratedValue(strategy = GenerationType.SEQUENCE)
+    @Id @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "mov_dinero")
+    @SequenceGenerator(name="mov_dinero",sequenceName="DB_SEQUENCIA3", allocationSize=1)
     private int id;
     @Column(name = "monto",nullable = false)
     private float montoMovimiento;
     @Column(name = "concepto")
     private String concepto;
 
-//    @Column(name = "empleado")
-//    private String empleado;
+    @ManyToOne
+    @JoinTable(name="empleado_id")
+    private Empleado empleado;
 
     public MovimientoDinero(){}
 
-    public MovimientoDinero(Integer id, float montoMovimiento, String concepto) {
+    public MovimientoDinero(int id, float montoMovimiento, String concepto, Empleado empleado) {
         this.montoMovimiento = montoMovimiento;
         this.concepto = concepto;
+        this.empleado=empleado;
     }
 
     public float getMontoMovimiento() {
@@ -48,12 +51,21 @@ public class MovimientoDinero {
 //        this.id = id;
 //    }
 
+    public Empleado getEmpleado() {
+        return empleado;
+    }
+
+    public void setEmpleado(Empleado empleado) {
+        this.empleado = empleado;
+    }
+
     @Override
     public String toString() {
         return "MovimientoDinero{" +
                 "id=" + id +
                 ", montoMovimiento=" + montoMovimiento +
                 ", concepto='" + concepto + '\'' +
+                ", Empleado='" + empleado + '\'' +
                 '}';
     }
 
@@ -67,6 +79,6 @@ public class MovimientoDinero {
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, montoMovimiento);
+        return Objects.hash(id, montoMovimiento,empleado);
     }
 }

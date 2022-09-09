@@ -7,28 +7,28 @@ import java.util.Objects;
 @Table(name="empleado")
 public class Empleado {
 
-    @Id @GeneratedValue(strategy = GenerationType.SEQUENCE)
+    @Id @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "empleado")
+    @SequenceGenerator(name="empleado",sequenceName="DB_SEQUENCIA2", allocationSize=1)
     private int id;
     @Column(name = "nombre",nullable = false)
     private String nombre;
     @Column(name = "correo")
     private String correo;
-    @Column(name = "empresa",nullable = false)
-    private String empresa;
+
+    @ManyToOne
+    @JoinTable(name="empresa_id")
+    private Empresa empresa;
     @Column(name = "rol")
     private String rol;
-    @Transient
-    MovimientoDinero movdinero;
-
 
     public Empleado(){}
 
-    public Empleado(String nombre, String correo, String empresa, String rol, MovimientoDinero movdinero) {
+    public Empleado(String nombre, String correo, Empresa empresa, String rol) {
         this.nombre = nombre;
         this.correo = correo;
         this.empresa = empresa;
         this.rol = rol;
-        this.movdinero = movdinero;
+//        this.movdinero = movdinero;
     }
 
     public String getNombre() {
@@ -47,11 +47,11 @@ public class Empleado {
         this.correo = correo;
     }
 
-    public String getEmpresa() {
+    public Empresa getEmpresa() {
         return empresa;
     }
 
-    public void setEmpresa(String empresa) {
+    public void setEmpresa(Empresa empresa) {
         this.empresa = empresa;
     }
 
@@ -72,13 +72,13 @@ public class Empleado {
 //    }
 
 
-    public MovimientoDinero getMovdinero() {
-        return movdinero;
-    }
-
-    public void setMovdinero(MovimientoDinero movdinero) {
-        this.movdinero = movdinero;
-    }
+//    public MovimientoDinero getMovdinero() {
+//        return movdinero;
+//    }
+//
+//    public void setMovdinero(MovimientoDinero movdinero) {
+//        this.movdinero = movdinero;
+//    }
 
     @Override
     public String toString() {
@@ -88,7 +88,7 @@ public class Empleado {
                 ", correo='" + correo + '\'' +
                 ", empresa='" + empresa + '\'' +
                 ", rol='" + rol + '\'' +
-                ", movdinero=" + movdinero +
+//                ", movdinero=" + movdinero +
                 '}';
     }
 
