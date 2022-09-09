@@ -2,7 +2,7 @@
 
 Aplicativo web para la administracion de ingresos y egresos de la compañia.
 
-Proyecto desarrollado con Spring-Boot y PostgreSQL
+Proyecto desarrollado con Spring-Boot y PostgreSQL aplicado con Supabase
 
 ## Integrantes
 
