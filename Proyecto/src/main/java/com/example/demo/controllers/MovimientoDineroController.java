@@ -6,7 +6,8 @@ import com.example.demo.services.MovimientosDineroService;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
-@RequestMapping("/enterprises/{id}/movements")
+//@RequestMapping("/enterprises/{id}/movements")
+@RequestMapping("/movements/{id}")
 public class MovimientoDineroController {
     MovimientosDineroService service;
 
