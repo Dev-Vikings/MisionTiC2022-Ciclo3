@@ -2,6 +2,7 @@ package com.example.demo.services;
 
 import com.example.demo.entities.Empleado;
 import com.example.demo.repositories.EmpleadoRepository;
+import com.example.demo.repositories.EmpresaRepository;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -37,7 +38,16 @@ public class EmpleadoService {
     }
 
     public Empleado nuevoEmpleado(Empleado empleado){
-        return repository.save(empleado);
+        if(existEmpresa(empleado.getEmpresa().getId())){
+            if(getEmpleado(empleado.getId())==null) {
+                return repository.save(empleado);
+            }
+
+        }
+
+        return null;
+
+
     }
 
     public Empleado patchEmpleado(Empleado empleadoNew, Empleado empleadoOld){
@@ -51,4 +61,12 @@ public class EmpleadoService {
     public void deleteEmpleado(Empleado empleado){
         repository.delete(empleado);
     }
+
+    private boolean existEmpresa(int id){
+
+
+        return repository.getEmpresasById(id).size()>0;
+    }
+
+
 }

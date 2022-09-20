@@ -21,7 +21,10 @@ public class EmpresaService {
         return this.repository.findAll();
     }
     public List<Empresa> getEmpresa(int nit){
-            return this.repository.findById(nit);
+            return this.repository.findByNit(nit);
+    }
+    public List<Empresa> getEmpresaId(int id){
+        return this.repository.findByUniqueId(id);
     }
 
     public Empresa nuevaEmpresa(Empresa empresa){
@@ -43,7 +46,7 @@ public class EmpresaService {
     }
 
     public void deleteEmpresa(int nit){
-        Empresa empresa=repository.findById(nit).get(0);
+        Empresa empresa=repository.findByNit(nit).get(0);
         repository.delete(empresa);
 
     }

@@ -40,6 +40,7 @@ public class MovimientosDineroService {
     public MovimientoDinero patchMovimientoDinero(MovimientoDinero movDineroOld,MovimientoDinero movDineroNew){
         movDineroOld.setConcepto(movDineroNew.getConcepto());
         movDineroOld.setMontoMovimiento(movDineroNew.getMontoMovimiento());
+        movDineroOld.setEmpleado(movDineroNew.getEmpleado());
         return repository.save(movDineroOld);
     }
 

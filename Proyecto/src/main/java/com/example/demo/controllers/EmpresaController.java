@@ -32,7 +32,7 @@ public class EmpresaController {
         return service.getEmpresa(id);
 
     }
-    
+
     @PatchMapping("/{id}")
     public Empresa patchEmpresa(@RequestBody Empresa empresanew, @PathVariable int id){
         Empresa empresaOld=service.getEmpresa(id).get(0);
@@ -66,5 +66,9 @@ public class EmpresaController {
 
     }
 
+    @GetMapping("/id/{id}")
+    public  List<Empresa> getEmpresaById(@PathVariable int id){
+        return service.getEmpresaId(id);
+    }
 
 }

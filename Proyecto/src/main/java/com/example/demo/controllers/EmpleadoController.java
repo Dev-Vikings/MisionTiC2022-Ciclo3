@@ -17,6 +17,7 @@ public class EmpleadoController {
 
     @PostMapping
     public Empleado newEmpleado(@RequestBody Empleado empleado){
+
         return service.nuevoEmpleado(empleado);
     }
 
@@ -33,9 +34,11 @@ public class EmpleadoController {
     @PatchMapping("/{id}")
     public Empleado patchEmpleado(@PathVariable int id,@RequestBody Empleado empleado){
         Empleado empleadoOld=service.getEmpleado(id);
+//        if(empleado.getEmpresa().getId())
         if(empleadoOld!=null){
             return service.patchEmpleado(empleado, empleadoOld);
         }
+
         return null;
     }
 
@@ -48,4 +51,6 @@ public class EmpleadoController {
         }
         return null;    }
 
+
 }
+
