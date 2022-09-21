@@ -6,7 +6,6 @@ import com.example.demo.services.MovimientosDineroService;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
-//@RequestMapping("/enterprises/{id}/movements")
 @RequestMapping("/movements/{id}")
 public class MovimientoDineroController {
     MovimientosDineroService service;
@@ -29,7 +28,8 @@ public class MovimientoDineroController {
      * Crea un nuevo movimiento de dinero
      * @param id - Obtenido en la ruta /movements/{id} - Representa el id del usuario relacionado con el movimiento de
      *           dinero
-     * @param movimientoDinero - JSON con la informacion {"montoMovimiento":double,"concepto":String}
+     * @param movimientoDinero - JSON con la informacion
+     *                         {"montoMovimiento":double,"concepto":String}
      * @return el registro del movimientoDinero del dinero
      */
     @PostMapping
@@ -41,6 +41,15 @@ public class MovimientoDineroController {
      * Edita un movimientoDinero existente
      * @param id - Id del movimiento de dinero a consultar
      * @param movimientoDinero JSON con la informacion a actualizar
+     *                         {
+     *     "montoMovimiento": double,
+     *     "concepto": String,
+     *     "empleado": {
+     *         "id": int
+     *         },
+     *         "rol": String
+     *     }
+     * }
      * @return el registro del movimientoDinero actualizado
      */
     @PatchMapping
@@ -48,7 +57,6 @@ public class MovimientoDineroController {
         MovimientoDinero movDineroOld=service.getMovimientoDinero(id);
         if(movDineroOld!=null){
             return service.patchMovimientoDinero(movDineroOld,movimientoDinero);
-
         }
         return null;
     }

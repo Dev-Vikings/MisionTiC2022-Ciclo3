@@ -10,8 +10,6 @@ import java.util.List;
 
 @Repository
 public interface EmpleadoRepository  extends JpaRepository<Empleado,Integer> {
-
-//    @Query(value = "SELECT empresa FROM Empleado empleado JOIN empleado.empresa empresa where empresa.id = :id")
-@Query(value="select empresa from Empresa empresa where empresa.id=:id")
+    @Query(value="select empresa from Empresa empresa where empresa.id=:id")
     List<Empresa> getEmpresasById(int id);
 }

@@ -44,13 +44,8 @@ public class MovimientosDineroService {
         movDineroOld.setEmpleado(movDineroNew.getEmpleado());
         return repository.save(movDineroOld);
     }
-
     //delete
     public void deleteMovimientoDinero(MovimientoDinero movimientoDinero){
         repository.delete(movimientoDinero);
-
     }
-
-
-
 }

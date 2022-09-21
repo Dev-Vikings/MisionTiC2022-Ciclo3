@@ -10,8 +10,6 @@ import java.util.List;
 
 @Repository
 public interface MovimientosDineroRepository extends JpaRepository<MovimientoDinero,Integer> {
-
-
     @Query(value="select empleado from Empleado empleado where empleado.id=:id")
     List<Empleado> getEmpleadoById(int id);
 }

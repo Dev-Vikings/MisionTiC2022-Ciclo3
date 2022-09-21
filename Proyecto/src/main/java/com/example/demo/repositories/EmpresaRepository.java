@@ -11,7 +11,6 @@ import java.util.List;
 public interface EmpresaRepository  extends JpaRepository <Empresa,Integer>{
     @Query(value="select empresa from Empresa empresa where empresa.nit=:nit")
     List<Empresa> findByNit(int nit);
-
     @Query(value="select empresa from Empresa empresa where empresa.id=:id")
     List<Empresa> findByUniqueId(int id);
 }
