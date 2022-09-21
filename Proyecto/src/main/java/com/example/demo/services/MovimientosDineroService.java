@@ -33,7 +33,8 @@ public class MovimientosDineroService {
         return null;
     }
     //post
-    public MovimientoDinero nuevoMovimientoDinero(MovimientoDinero movimientoDinero){
+    public MovimientoDinero nuevoMovimientoDinero(MovimientoDinero movimientoDinero,int id){
+        movimientoDinero.setEmpleado(repository.getEmpleadoById(id).get(0));
         return repository.save(movimientoDinero);
     }
     //patch
