@@ -10,7 +10,7 @@
           name="description"
           content="Proyecto para el ciclo 3 de MisionTIC22 UDEA"
   />
-  <title>DEVikings - Nuevo Vikingo</title>
+  <title>DEVikings - Actualizar Vikingo</title>
   <!-- CSS only -->
   <link
           href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/css/bootstrap.min.css"
@@ -27,54 +27,44 @@
 <body class="min-vh-100 bg-dark">
 <!-- JavaScript Bundle with Popper -->
 <div class="container m-5 mx-auto">
-  <h1 class="fw-bold text-center mb-5 text-white">Agregar un nuevo Vikingo</h1>
+  <h1 class="fw-bold text-center mb-5 text-white">Editar un Vikingo</h1>
 
-  <form th:action="@{/empleados}" method="post" class="needs-validation bg-white p-4 rounded shadow-lg" novalidate>
+  <form th:action="@{/transacciones/actualizar/{id} (id = ${transaccion.id})}" method="post" class="needs-validation bg-white p-4 rounded shadow-lg" novalidate>
     <div class="form-group mb-3">
-      <label class="fw-bolder form-label" for="nombre" required
-      >Nombre:</label
+      <label class="fw-bolder form-label" for="concepto" required
+      >Concepto:</label
       >
       <input
               type="text"
               class="form-control"
-              id="nombre"
-              placeholder="Ingresa el nombre"
-              th:field="${empleado.nombre}"
+              id="concepto"
+              placeholder="Ingresa el concepto del negocio"
+              th:field="${transaccion.concepto}"
       />
       <div class="valid-feedback">Looks good!</div>
     </div>
     <div class="form-group mb-3">
-      <label class="fw-bolder" for="email">Correo:</label>
-      <input
-              type="email"
-              class="form-control"
-              id="email"
-              placeholder="mail@mail.com"
-              th:field="${empleado.correo}"
-      />
-    </div>
-    <div class="form-group mb-3">
-      <label class="fw-bolder" for="rol">Rol: </label>
-      <select class="form-select" name="rol" id="rol" th:field="${empleado.rol}">
-        <option value="" disabled>--Seleccione el Rol del Vikingo--</option>
-        <option th:value="Rey" th:text="Rey">Rey</option>
-        <option th:value="Vikingo" th:text="Vikingo">Vikingo</option>
-      </select>
-    </div>
-
-
-    <div class="form-group mb-3">
-      <label class="fw-bolder" for="reino_id">Reino:</label>
+      <label class="fw-bolder" for="monto">Monto:</label>
       <input
               type="number"
               class="form-control"
-              id="reino_id"
-              placeholder="Kateggat"
-              th:field="${empleado.empresa.id}"
+              id="monto"
+              placeholder="$2000"
+              th:field="${transaccion.monto}"
       />
     </div>
 
-    <button type="submit" class="btn btn-warning fw-bold">Agregar</button>
+    <div class="form-group mb-3">
+      <label class="fw-bolder" for="vikingo_id">Vikingo:</label>
+      <input
+              type="number"
+              class="form-control"
+              id="vikingo_id"
+              placeholder="1"
+              th:field="${transaccion.empleado.id}"
+      />
+    </div>
+    <button type="submit" class="btn btn-warning fw-bold">Actualizar</button>
   </form>
 </div>
 
