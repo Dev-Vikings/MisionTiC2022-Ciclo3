@@ -8,32 +8,22 @@ import java.util.Map;
 
 @Service
 public class UserService {
+    private UserRepository userRepository;
 
-    private UserRepository repository;
-
-    public UserService(UserRepository repository){this.repository=repository;}
-
-    public User createUser(User newUser){
-        return this.repository.save(newUser);
+    public UserService(UserRepository userRepository) {
+        this.userRepository = userRepository;
     }
 
-    public User findUserByEmail(String email){
-        return this.repository.findByEmail(email);
-    }
-    public User getOrCreateUser(Map<String, Object> userData){
-        String email=(String) userData.get("email");
-
-        User user=findUserByEmail(email);
+    public User saveUser(Map<String, Object> dataUser){
+        String email=(String) dataUser.get("email");
+        User user=userRepository.findByEmail((String) dataUser.get("email"));
         if(user==null){
-            String name=(String) userData.get("nickname");
-            String image=(String) userData.get("picture");
-            String auth0id=(String) userData.get("sub");
-
-
-            User newUser=new User(name=name,email=email,image=image,auth0id=auth0id);
-            return createUser(newUser);
+            String name=(String) dataUser.get("nickname");
+            String image=(String) dataUser.get("picture");
+            String authid=(String) dataUser.get("sub");
+            User newUser=new User(email,image,authid,name);
+            userRepository.save(newUser);
         }
         return user;
-
     }
 }
