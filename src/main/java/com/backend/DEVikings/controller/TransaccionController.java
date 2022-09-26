@@ -1,8 +1,11 @@
 package com.backend.DEVikings.controller;
 
 import com.backend.DEVikings.model.Transaccion;
+import com.backend.DEVikings.service.EmpresaService;
 import com.backend.DEVikings.service.TransaccionService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
+import org.springframework.security.oauth2.core.oidc.user.OidcUser;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -14,11 +17,21 @@ public class TransaccionController {
 
     @Autowired
     TransaccionService transaccionService;
+    WebController webController;
+
+    public TransaccionController(TransaccionService transaccionService, WebController webController) {
+        this.transaccionService = transaccionService;
+        this.webController = webController;
+    }
 
     @GetMapping("/transacciones")
-    private String verTransaccion(Model model){
+    private String verTransaccion(Model model,@AuthenticationPrincipal OidcUser principal){
+        if (principal != null) {
         model.addAttribute("transacciones", transaccionService.verTransaccion());
         return "transacciones";
+    }
+        webController.index(model,principal);
+        return "index";
     }
 
     @GetMapping("/agregar-transaccion")

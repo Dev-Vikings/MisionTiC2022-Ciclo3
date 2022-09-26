@@ -3,21 +3,34 @@ package com.backend.DEVikings.controller;
 import com.backend.DEVikings.model.Empresa;
 import com.backend.DEVikings.service.EmpresaService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
+import org.springframework.security.oauth2.core.oidc.user.OidcUser;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
+
 @Controller
 public class EmpresaController {
     @Autowired
     EmpresaService empresaService;
+    WebController webController;
+
+    public EmpresaController(EmpresaService empresaService, WebController webController) {
+        this.empresaService = empresaService;
+        this.webController = webController;
+    }
 
     @GetMapping("/empresas")
-    private String verEmpresa(Model model){
-        model.addAttribute("empresas", empresaService.verEmpresa());
-        return "empresas";
+    private String verEmpresa(Model model,@AuthenticationPrincipal OidcUser principal){
+        if (principal != null) {
+            model.addAttribute("empresas", empresaService.verEmpresa());
+            return "empresas";
+        }
+        webController.index(model,principal);
+        return "index";
     }
 
     @GetMapping("/agregar-empresa")

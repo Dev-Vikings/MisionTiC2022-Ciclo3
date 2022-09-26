@@ -1,6 +1,6 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org">
-<head>
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity5"><head>
   <meta charset="UTF-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -57,9 +57,9 @@
           </li>
         </ul>
         <form class="d-flex" role="search">
-          <button class="btn btn-outline-warning" type="submit">
+          <a class="btn btn-outline-warning" th:href="@{/logout}">
             Logout
-          </button>
+          </a>
         </form>
       </div>
     </div>
