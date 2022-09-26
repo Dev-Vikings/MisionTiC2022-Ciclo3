@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="icon" href="images/logo.png" />
+  <meta name="author" content="Sebastian Fuentes Martinez" />
+  <meta
+          name="description"
+          content="Proyecto para el ciclo 3 de MisionTIC22 UDEA"
+  />
+  <title>DEVikings - Actualizar Vikingo</title>
+  <!-- CSS only -->
+  <link
+          href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/css/bootstrap.min.css"
+          rel="stylesheet"
+          integrity="sha384-iYQeCzEYFbKjA/T2uDLTpkwGzCiq6soy8tYaI1GyVh/UjpbCx/TYkiZhlZB6+fzT"
+          crossorigin="anonymous"
+  />
+  <link
+          rel="stylesheet"
+          href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.9.1/font/bootstrap-icons.css"
+  />
+  <link rel="stylesheet" href="./css/styles.css" />
+</head>
+<body class="min-vh-100 bg-dark">
+<!-- JavaScript Bundle with Popper -->
+<div class="container m-5 mx-auto">
+  <h1 class="fw-bold text-center mb-5 text-white">Editar un Vikingo</h1>
+
+  <form th:action="@{/empleados/actualizar/{id} (id = ${empleado.id})}" method="post" class="needs-validation bg-white p-4 rounded shadow-lg" novalidate>
+    <div class="form-group mb-3">
+      <label class="fw-bolder form-label" for="nombre" required
+      >Nombre:</label
+      >
+      <input
+              type="text"
+              class="form-control"
+              id="nombre"
+              placeholder="Ingresa el nombre"
+              th:field="${empleado.nombre}"
+      />
+      <div class="valid-feedback">Looks good!</div>
+    </div>
+    <div class="form-group mb-3">
+      <label class="fw-bolder" for="email">Correo:</label>
+      <input
+              type="email"
+              class="form-control"
+              id="email"
+              placeholder="mail@mail.com"
+              th:field="${empleado.correo}"
+      />
+    </div>
+    <div class="form-group mb-3">
+      <label class="fw-bolder" for="direccion">Rol: </label>
+      <select class="form-select" name="rol" id="direccion" th:field="${empleado.rol}">
+        <option value="" disabled>--Seleccione el Rol del Vikingo--</option>
+        <option th:value="Rey" th:text="Rey">Rey</option>
+        <option th:value="Vikingo" th:text="Vikingo">Vikingo</option>
+      </select>
+    </div>
+
+    <div class="form-group mb-3">
+      <label class="fw-bolder" for="reino_id">Reino:</label>
+      <input
+              type="number"
+              class="form-control"
+              id="reino_id"
+              placeholder="Kateggat"
+              th:field="${empleado.empresa.id}"
+      />
+    </div>
+    <button type="submit" class="btn btn-warning fw-bold">Actualizar</button>
+  </form>
+</div>
+
+<script
+        src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-u1OknCvxWvY5kfmNBILK2hRnQC3Pr17a+RTT6rIHI7NnikvbZlHgTPOOmMi466C8"
+        crossorigin="anonymous"
+></script>
+</body>
+</html>
