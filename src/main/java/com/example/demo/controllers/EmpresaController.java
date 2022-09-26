@@ -2,7 +2,10 @@ package com.example.demo.controllers;
 
 import com.example.demo.entities.Empresa;
 import com.example.demo.services.EmpresaService;
+import org.springframework.data.annotation.LastModifiedDate;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.view.RedirectView;
 
 import java.util.List;
 
@@ -22,8 +25,12 @@ public class EmpresaController {
      * @return JSON de la empresa creada
      */
     @PostMapping // Crear una empresa
-    public Empresa newEmpresas(@RequestBody Empresa empresa) {
-        return service.nuevaEmpresa(empresa);
+//    public Empresa newEmpresas(@RequestBody Empresa empresa) {
+//        return service.nuevaEmpresa(empresa);
+//    }
+    public RedirectView newEmpresas(@ModelAttribute Empresa empresa, Model model) {
+        service.nuevaEmpresa(empresa);
+        return new RedirectView("empresas");
     }
 
     /***
@@ -55,8 +62,23 @@ public class EmpresaController {
      * @return JSON del registro actualizado
      */
     @PatchMapping("/{id}")
-    public Empresa patchEmpresa(@RequestBody Empresa empresanew, @PathVariable int id) {
-        Empresa empresaOld = service.getEmpresa(id).get(0);
+//    public Empresa patchEmpresa(@RequestBody Empresa empresanew, @PathVariable int id) {
+//        Empresa empresaOld = service.getEmpresa(id).get(0);
+//        if (empresaOld != null) {
+//            if (empresanew.getNit() == null) {
+//                empresanew.setNit(empresaOld.getNit());
+//            }
+//            if ((empresanew.getNit() != empresaOld.getNit())) {
+//                if (!service.getEmpresa(empresanew.getNit()).isEmpty()) {
+//                    return null;
+//                }
+//            }
+//            return service.patchEmpresa(empresaOld, empresanew);
+//        }
+//        return null;
+//    }
+    public Empresa patchEmpresa(@ModelAttribute Empresa empresanew, @PathVariable int id, Model model) {
+        Empresa empresaOld = (Empresa) service.getEmpresaId(id);
         if (empresaOld != null) {
             if (empresanew.getNit() == null) {
                 empresanew.setNit(empresaOld.getNit());
@@ -78,15 +100,24 @@ public class EmpresaController {
      * @return JSON de la empresa eliminada
      */
     @DeleteMapping("/{id}")
-    public Empresa deleteEmpresa(@PathVariable int id) {
-        Empresa empresa = service.getEmpresa(id).get(0);
-        if (empresa != null) {
-            service.deleteEmpresa(id);
-            return empresa;
-        }
-        return null;
-    }
+//    public Empresa deleteEmpresa(@PathVariable int id) {
+//        Empresa empresa = service.getEmpresa(id).get(0);
+//        if (empresa != null) {
+//            service.deleteEmpresa(id);
+//            return empresa;
+//        }
+//        return null;
+//    }
+    public RedirectView deleteEmpresa(@PathVariable int id) {
 
+        Empresa empresa = service.findByid(id);
+        System.out.println(empresa.toString());
+        if (empresa != null) {
+            service.deleteEmpresaByID(id);
+
+        }
+        return new RedirectView("/empleados");
+    }
     /***
      * Permite conocer una empresa con ID especifico usando GET
      * 

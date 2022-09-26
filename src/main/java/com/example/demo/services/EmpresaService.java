@@ -41,5 +41,17 @@ public class EmpresaService {
         Empresa empresa=repository.findByNit(nit).get(0);
         repository.delete(empresa);
     }
+
+    public void deleteEmpresaByID(int id){
+        repository.delete(findByid(id));
+    }
+
+    public Empresa findByid(int id){
+        Optional<Empresa> optEmpresa=repository.findById(id);
+        if(optEmpresa.isPresent()){
+            return optEmpresa.get();
+        }
+        return null;
+    }
 }
 

@@ -32,12 +32,8 @@ public class EmpleadoService {
         return null;
     }
     public Empleado nuevoEmpleado(Empleado empleado){
-        System.out.println("fuera if");
         if(existEmpresa(empleado.getEmpresa().getId())){
-            System.out.println("primer if");
-            System.out.println(empleado.getId());
             if(getEmpleado(empleado.getId())==null) {
-                System.out.println("segundo if");
                 return repository.save(empleado);
             }
         }

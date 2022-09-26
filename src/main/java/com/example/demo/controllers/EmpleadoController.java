@@ -102,13 +102,20 @@ public class EmpleadoController {
      * @return - JSON del empleado eliminado
      */
     @DeleteMapping("/{id}")
-    public Empleado deleteEmpleado(@PathVariable int id) {
+//    public Empleado deleteEmpleado(@PathVariable int id) {
+//        Empleado empleado = getEmpleado(id);
+//        if (empleado != null) {
+//            service.deleteEmpleado(empleado);
+//            return empleado;
+//        }
+//        return null;
+//    }
+    public RedirectView deleteEmpleado(@PathVariable int id) {
         Empleado empleado = getEmpleado(id);
         if (empleado != null) {
             service.deleteEmpleado(empleado);
-            return empleado;
         }
-        return null;
+        return new RedirectView("/empleados");
     }
 
 }
