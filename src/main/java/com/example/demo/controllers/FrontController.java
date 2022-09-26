@@ -17,28 +17,28 @@ import java.util.List;
 @Controller
 public class FrontController {
 
-    //Servicios
+    // Servicios
     EmpresaService empresaService;
     EmpleadoService empleadoService;
     MovimientosDineroService movimientosDineroService;
     UserService userService;
 
-
-    public FrontController(EmpleadoService empleadoService, EmpresaService empresaService, MovimientosDineroService movimientosDineroService, UserService userService ){
+    public FrontController(EmpleadoService empleadoService, EmpresaService empresaService,
+            MovimientosDineroService movimientosDineroService, UserService userService) {
         this.empleadoService = empleadoService;
         this.empresaService = empresaService;
         this.movimientosDineroService = movimientosDineroService;
-        this.userService=userService;
+        this.userService = userService;
 
     }
 
-    //Metodos
+    // Metodos
     @GetMapping("/")
-    public String index(Model model, @AuthenticationPrincipal OidcUser principal){
-        if(principal!=null) {
+    public String index(Model model, @AuthenticationPrincipal OidcUser principal) {
+        if (principal != null) {
 
             this.userService.saveUser(principal.getClaims());
-            model.addAttribute("nick",principal.getClaims().get("nickname"));
+            model.addAttribute("nick", principal.getClaims().get("nickname"));
 
         }
 
@@ -46,25 +46,28 @@ public class FrontController {
     }
 
     @GetMapping("/empleados")
-    public String empleados(Model model,@AuthenticationPrincipal OidcUser principal){
-        if(principal!=null) {
+    public String empleados(Model model, @AuthenticationPrincipal OidcUser principal) {
+        if (principal != null) {
 
             List<Empleado> empleados = empleadoService.getEmpleados();
             model.addAttribute("empleados", empleados);
+
+            model.addAttribute("listEmpresas", empresaService.getEmpresas());
+            model.addAttribute("empleado", new Empleado());
             return "empleados";
         }
-            index(model,principal);
-            return "index";
+        index(model, principal);
+        return "index";
 
     }
 
     @GetMapping("/main")
-    public String main(Model model, @AuthenticationPrincipal OidcUser principal){
-        if(principal!=null) {
+    public String main(Model model, @AuthenticationPrincipal OidcUser principal) {
+        if (principal != null) {
 
             return "main";
         }
-        index(model,principal);
+        index(model, principal);
         return "index";
     }
 }
