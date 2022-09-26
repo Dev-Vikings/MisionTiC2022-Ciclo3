@@ -10,20 +10,23 @@
   <title>Titulo</title>
 </head>
 <body>
+
 <main>
   <div class="px-4 py-5 my-5 text-center">
     <img src="images/logo.png" class="d-block mx-auto mb-4" height="100" alt="Tareas logo"/>
     <h1 class="display-5 fw-bold">DEVikings</h1>
     <div class="col-lg-6 mx-auto">
       <p class="lead mb-4">Sistema para la gestion de pagos</p>
+
       <div sec:authorize="!isAuthenticated()">
-        <a th:href="@{/oauth2/authorization/auth0}" type="button" class="btn btn-primary btn-lg px-4 gap-3" >Iniciar sesion</a>
+        <a th:href="@{/oauth2/authorization/auth0}" type="button"   class="btn btn-primary btn-lg px-4 gap-3" >Iniciar sesion</a>
       </div>
       <div sec:authorize="isAuthenticated()">
-        <h5 th:text="'Bienvenido '+${user.getName()}"></h5>
-<!--&lt;!&ndash;        &ndash;&gt;-->
-        <a th:href="@{/main}" type="button" class="btn btn-primary btn-lg px-4 gap-3" >Llevame a la app</a>
+        <h5 th:text="'Bienvenido '+${nick}"></h5>
+        <a th:href="@{/main}" type="button"   class="btn btn-primary btn-lg px-4 gap-3" >Llevame a la app</a>
       </div>
+
+
       <button type="button" class="btn btn-outline-secundary btn-lg px-4">Saber más</button>
     </div>
   </div>

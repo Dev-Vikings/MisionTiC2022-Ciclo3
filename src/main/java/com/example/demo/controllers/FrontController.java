@@ -37,22 +37,34 @@ public class FrontController {
     public String index(Model model, @AuthenticationPrincipal OidcUser principal){
         if(principal!=null) {
 
-            User user=this.userService.getOrCreateUser(principal.getClaims());
-            model.addAttribute("user",user);
-    }
+            this.userService.getOrCreateUser(principal.getClaims());
+            model.addAttribute("nick",principal.getClaims().get("nickname"));
+
+        }
+
         return "index";
     }
 
     @GetMapping("/empleados")
-    public String empleados(Model model){
-        List<Empleado> empleados = empleadoService.getEmpleados();
-        model.addAttribute("empleados", empleados);
-        return "empleados";
+    public String empleados(Model model,@AuthenticationPrincipal OidcUser principal){
+        if(principal!=null) {
+
+            List<Empleado> empleados = empleadoService.getEmpleados();
+            model.addAttribute("empleados", empleados);
+            return "empleados";
+        }
+            index(model,principal);
+            return "index";
+
     }
 
     @GetMapping("/main")
-    public String main(Model model){
+    public String main(Model model, @AuthenticationPrincipal OidcUser principal){
+        if(principal!=null) {
 
-        return "main";
+            return "main";
+        }
+        index(model,principal);
+        return "index";
     }
 }
