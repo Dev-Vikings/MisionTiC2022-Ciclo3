@@ -1,6 +1,8 @@
 package com.backend.DEVikings.controller;
 
+import com.backend.DEVikings.model.Empleado;
 import com.backend.DEVikings.model.Empresa;
+import com.backend.DEVikings.service.EmpleadoService;
 import com.backend.DEVikings.service.EmpresaService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
@@ -17,9 +19,12 @@ public class EmpresaController {
     EmpresaService empresaService;
     WebController webController;
 
-    public EmpresaController(EmpresaService empresaService, WebController webController) {
+    EmpleadoService empleadoService;
+
+    public EmpresaController(EmpresaService empresaService, WebController webController, EmpleadoService empleadoService) {
         this.empresaService = empresaService;
         this.webController = webController;
+        this.empleadoService=empleadoService;
     }
 
     @GetMapping("/empresas")
@@ -27,6 +32,9 @@ public class EmpresaController {
         if (principal != null) {
             model.addAttribute("empresas", empresaService.verEmpresa());
             model.addAttribute("nick", principal.getClaims().get("nickname"));
+            String email= (String) principal.getClaims().get("email");
+            Empleado empleado=empleadoService.getEmpleadobyEmail(email);
+            model.addAttribute("empleado", empleado);
 
             return "empresas";
         }

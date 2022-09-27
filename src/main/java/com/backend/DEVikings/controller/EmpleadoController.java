@@ -27,6 +27,9 @@ public class EmpleadoController {
     private String verEmpleado(Model model,@AuthenticationPrincipal OidcUser principal){
         if (principal != null) {
             model.addAttribute("empleados", empleadoService.verEmpleado());
+            String email= (String) principal.getClaims().get("email");
+            Empleado empleado=empleadoService.getEmpleadobyEmail(email);
+            model.addAttribute("empleado", empleado);
             return "empleados";
         }
         webController.index(model,principal);
