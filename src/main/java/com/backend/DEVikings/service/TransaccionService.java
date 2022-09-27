@@ -28,4 +28,8 @@ public class TransaccionService {
     public void eliminarTransaccion(Long id){
         transaccionRepository.deleteById(id);
     }
+
+    public List<Transaccion> verTransaccionByEmpresaID(Long id){
+        return transaccionRepository.getTransaccionByCompanyId(id);
+    }
 }

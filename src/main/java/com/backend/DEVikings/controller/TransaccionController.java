@@ -39,10 +39,15 @@ public class TransaccionController {
 
             String email= (String) principal.getClaims().get("email");
             Empleado empleado=empleadoService.getEmpleadobyEmail(email);
+            Long idEmpresa=empleado.getEmpresa().getId();
             model.addAttribute("empleado", empleado);
-            model.addAttribute("transacciones", transaccionService.verTransaccion());
-            model.addAttribute("empresas",empresaService.verEmpresa());
+//            model.addAttribute("transacciones", transaccionService.verTransaccion());
+            model.addAttribute("transacciones", transaccionService.verTransaccionByEmpresaID(idEmpresa));
 
+
+            model.addAttribute("empresas",empresaService.verEmpresa());
+//            System.out.println(transaccionService.verTransaccionByEmpresaID(1).get(0).getEmpleado().getEmpresa().getNombre());
+//            System.out.println(transaccionService.verTransaccionByEmpresaID(1).size());
 
 
             return "transacciones";

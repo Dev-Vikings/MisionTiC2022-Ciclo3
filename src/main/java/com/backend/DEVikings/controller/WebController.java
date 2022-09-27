@@ -1,7 +1,6 @@
 package com.backend.DEVikings.controller;
 
 import com.backend.DEVikings.service.EmpleadoService;
-import com.backend.DEVikings.service.EmpresaService;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.security.oauth2.core.oidc.user.OidcUser;
 import org.springframework.stereotype.Controller;
