@@ -8,8 +8,8 @@
 		<version>2.7.4</version>
 		<relativePath/> <!-- lookup parent from repository -->
 	</parent>
-	<groupId>com.example</groupId>
-	<artifactId>demo</artifactId>
+	<groupId>com.backend</groupId>
+	<artifactId>DEVikings</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
 	<name>DEVikings</name>
 	<description>Proyecto Ciclo 3 MisionTIC UdeA</description>
