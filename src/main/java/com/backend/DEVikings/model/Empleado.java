@@ -33,6 +33,13 @@ public class Empleado {
     @Column(name = "tipo")
     private Enum_Roles rol;
 
+    @Column(name="image")
+    private String image;
+
+    @Column(name="auth0id",unique=true)
+    private String auth0id;
+
+
 //    @OneToOne(cascade = CascadeType.ALL)
 //    @JoinColumn(name = "empresa_id")
 //    private Empresa empresa;

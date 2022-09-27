@@ -18,17 +18,22 @@ public class TransaccionController {
     @Autowired
     TransaccionService transaccionService;
     WebController webController;
+    EmpresaService empresaService;
 
-    public TransaccionController(TransaccionService transaccionService, WebController webController) {
+    public TransaccionController(TransaccionService transaccionService, WebController webController, EmpresaService empresaService) {
         this.transaccionService = transaccionService;
         this.webController = webController;
+        this.empresaService=empresaService;
     }
 
     @GetMapping("/transacciones")
     private String verTransaccion(Model model,@AuthenticationPrincipal OidcUser principal){
         if (principal != null) {
-        model.addAttribute("transacciones", transaccionService.verTransaccion());
-        return "transacciones";
+            model.addAttribute("transacciones", transaccionService.verTransaccion());
+            model.addAttribute("empresas",empresaService.verEmpresa());
+
+
+            return "transacciones";
     }
         webController.index(model,principal);
         return "index";
