@@ -25,7 +25,7 @@ public class WebController {
 
         }
 
-        return "redirect:index";
+        return "index";
     }
 
 
