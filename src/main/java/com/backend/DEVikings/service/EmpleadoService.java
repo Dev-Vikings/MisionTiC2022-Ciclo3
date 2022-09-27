@@ -62,4 +62,7 @@ public class EmpleadoService {
         return empleadoRepository.findByCorreo(email);
     }
 
+    public List<Empleado> getEmpleadosEmpresa(long id){
+        return  empleadoRepository.getEmpleadosFromCompany(id);
+    }
 }

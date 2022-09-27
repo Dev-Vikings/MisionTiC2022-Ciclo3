@@ -84,6 +84,7 @@ public class TransaccionController {
         String email= (String) principal.getClaims().get("email");
         Empleado empleado=empleadoService.getEmpleadobyEmail(email);
         model.addAttribute("empleado", empleado);
+        model.addAttribute("empleadosDeEmpresaActual", empleadoService.getEmpleadosEmpresa(empleado.getEmpresa().getId()));
 
         Transaccion transaccion = transaccionService.verTransaccionPorId(id);
         model.addAttribute("transaccion", transaccion);
