@@ -60,5 +60,8 @@ public class EmpleadoService {
         return empleado;
     }
 
+    public Empleado getEmpleadobyEmail(String email){
+        return empleadoRepository.findByCorreo(email);
+    }
 
 }

@@ -58,4 +58,6 @@ public class Empleado {
     @UpdateTimestamp
     @Column(name = "fecha_actualizacion")
     private LocalDateTime fechaActualizacion;
+
+
 }

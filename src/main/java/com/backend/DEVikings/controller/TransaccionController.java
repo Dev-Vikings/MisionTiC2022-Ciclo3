@@ -1,6 +1,8 @@
 package com.backend.DEVikings.controller;
 
+import com.backend.DEVikings.model.Empleado;
 import com.backend.DEVikings.model.Transaccion;
+import com.backend.DEVikings.service.EmpleadoService;
 import com.backend.DEVikings.service.EmpresaService;
 import com.backend.DEVikings.service.TransaccionService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -11,6 +13,8 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.servlet.view.RedirectView;
 
 @Controller
 public class TransaccionController {
@@ -19,16 +23,23 @@ public class TransaccionController {
     TransaccionService transaccionService;
     WebController webController;
     EmpresaService empresaService;
+    EmpleadoService empleadoService;
 
-    public TransaccionController(TransaccionService transaccionService, WebController webController, EmpresaService empresaService) {
+    public TransaccionController(TransaccionService transaccionService, WebController webController, EmpresaService empresaService,EmpleadoService empleadoService) {
         this.transaccionService = transaccionService;
         this.webController = webController;
         this.empresaService=empresaService;
+        this.empleadoService=empleadoService;
+
     }
 
     @GetMapping("/transacciones")
     private String verTransaccion(Model model,@AuthenticationPrincipal OidcUser principal){
         if (principal != null) {
+
+            String email= (String) principal.getClaims().get("email");
+            Empleado empleado=empleadoService.getEmpleadobyEmail(email);
+            model.addAttribute("empleado", empleado);
             model.addAttribute("transacciones", transaccionService.verTransaccion());
             model.addAttribute("empresas",empresaService.verEmpresa());
 
@@ -40,7 +51,12 @@ public class TransaccionController {
     }
 
     @GetMapping("/agregar-transaccion")
-    private String verFormularioRegistroTransaccion(Transaccion transaccion){
+    private String verFormularioRegistroTransaccion(Transaccion transaccion,@AuthenticationPrincipal OidcUser principal,Model model){
+
+        String email= (String) principal.getClaims().get("email");
+        Empleado empleado=empleadoService.getEmpleadobyEmail(email);
+        model.addAttribute("empleado", empleado);
+
         return "agregar-transaccion";
     }
 
@@ -58,15 +74,20 @@ public class TransaccionController {
 }
 
     @GetMapping("/transacciones/editar/{id}")
-    private String verTransaccionPorId(@PathVariable("id") Long id, Model model){
+    private String verTransaccionPorId(@PathVariable("id") Long id, Model model, @AuthenticationPrincipal OidcUser principal){
+
+        String email= (String) principal.getClaims().get("email");
+        Empleado empleado=empleadoService.getEmpleadobyEmail(email);
+        model.addAttribute("empleado", empleado);
+
         Transaccion transaccion = transaccionService.verTransaccionPorId(id);
         model.addAttribute("transaccion", transaccion);
         return "actualizar-transaccion";
     }
 
-    @PostMapping("/transacciones/actualizar/{id}")
-    private String editarTransaccion(@PathVariable("id") Long id, Transaccion transaccion){
+    @PutMapping("/transacciones/actualizar/{id}")
+    private RedirectView editarTransaccion(@PathVariable("id") Long id, Transaccion transaccion){
         transaccionService.crearYActualizarTransaccion(transaccion);
-        return "redirect:/transacciones";
+        return new RedirectView("/transacciones");
     }
 }
