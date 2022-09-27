@@ -1,0 +1,52 @@
+.gradient-custom-2 {
+  /* fallback for old browsers */
+  background: #fccb90;
+
+  /* Chrome 10-25, Safari 5.1-6 */
+  background: rgb(27, 32, 44);
+  background: linear-gradient(
+    264deg,
+    rgba(27, 32, 44, 1) 0%,
+    rgba(68, 35, 71, 1) 50%,
+    rgba(78, 140, 158, 1) 100%
+  );
+
+  /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+  background: rgb(27, 32, 44);
+  background: linear-gradient(
+    264deg,
+    rgba(27, 32, 44, 1) 0%,
+    rgba(68, 35, 71, 1) 50%,
+    rgba(78, 140, 158, 1) 100%
+  );
+}
+
+.bg-purple {
+  background-color: #5f3164;
+  border: 1px solid #5f3164;
+}
+
+.bg-purple:hover {
+  background-color: #4e8c9e !important;
+  border-color: #4e8c9e !important;
+}
+
+.bg-purple:active {
+  transform: translateY(1px);
+}
+
+.bg-dark-sf {
+  background-color: #1b202c !important;
+}
+
+@media (min-width: 768px) {
+  .gradient-form {
+    height: 100vh !important;
+  }
+}
+@media (min-width: 769px) {
+  .gradient-custom-2 {
+    border-top-right-radius: 0.3rem;
+    border-bottom-right-radius: 0.3rem;
+  }
+}
