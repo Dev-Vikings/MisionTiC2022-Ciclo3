@@ -32,4 +32,10 @@ public class TransaccionService {
     public List<Transaccion> verTransaccionByEmpresaID(Long id){
         return transaccionRepository.getTransaccionByCompanyId(id);
     }
+
+    public Double totalTransaccionesByEmpresaID(Long id){
+        List<Transaccion> transaccions= transaccionRepository.getTransaccionByCompanyId(id);
+
+        return transaccions.stream().mapToDouble(Transaccion::getMonto).sum();
+    }
 }

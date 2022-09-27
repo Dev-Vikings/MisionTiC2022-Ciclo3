@@ -48,8 +48,7 @@ public class TransaccionController {
             model.addAttribute("empresas",empresaService.verEmpresa());
 //            System.out.println(transaccionService.verTransaccionByEmpresaID(1).get(0).getEmpleado().getEmpresa().getNombre());
 //            System.out.println(transaccionService.verTransaccionByEmpresaID(1).size());
-
-
+            model.addAttribute("total",transaccionService.totalTransaccionesByEmpresaID(idEmpresa));
             return "transacciones";
     }
         webController.index(model,principal);

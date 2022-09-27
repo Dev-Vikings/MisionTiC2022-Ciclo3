@@ -90,13 +90,13 @@
 
             <ul class="navbar-nav mb-2 mb-lg-0 mt-3 me-2">
               <li class="nav-item">
-                <p class="nav-link text-white">Sebastian</p>
+                <p class="nav-link text-white" th:text="'Bienvenido, '+${empleado.nombre}">Sebastian</p>
               </li>
               <li class="nav-item">
-                <p class="nav-link text-white">DEVikings</p>
+                <p class="nav-link text-white " th:text="${empleado.empresa.nombre}">DEVikings</p>
               </li>
               <li class="nav-item">
-                <p class="nav-link text-white">Desarrollador</p>
+                <p class="nav-link text-white" th:text="${empleado.rol}">Desarrollador</p>
               </li>
             </ul>
             <form class="d-flex" role="search">
@@ -169,7 +169,7 @@
 
         <div class="container me-auto">
           <h2 class="fw-bold">
-            Total: <span class="badge bg-warning">$22234</span>
+            Total: <span class="badge bg-warning"  th:text="'$ '+${total}">$22234</span>
           </h2>
         </div>
       </div>
