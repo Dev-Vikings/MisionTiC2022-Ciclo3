@@ -2,7 +2,7 @@
 
 Aplicativo web para la administracion de ingresos y egresos de la compañia.
 
-Proyecto desarrollado con SpringBoot, SupaBase y Thymeleaf desplegado en Heroky
+Proyecto desarrollado con SpringBoot, SupaBase y Thymeleaf desplegado en Heroku
 
 ## Integrantes
 
