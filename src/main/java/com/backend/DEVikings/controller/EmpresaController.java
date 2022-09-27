@@ -8,6 +8,7 @@ import org.springframework.security.oauth2.core.oidc.user.OidcUser;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.view.RedirectView;
 
 import java.util.List;
 
@@ -59,9 +60,9 @@ public class EmpresaController {
         return "actualizar-empresa";
     }
 
-    @PostMapping("/empresas/actualizar/{id}")
-    private String editarEmpresa(@PathVariable("id") Long id, Empresa empresa){
+    @PutMapping("/empresas/actualizar/{id}")
+    private RedirectView editarEmpresa(@PathVariable("id") Long id, Empresa empresa){
         empresaService.crearYActualizarEmpresa(empresa);
-        return "redirect:/empresas";
+        return new RedirectView("/empresas");
     }
 }

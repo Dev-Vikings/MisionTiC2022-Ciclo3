@@ -30,7 +30,7 @@
 <div class="container m-5 mx-auto">
   <h1 class="fw-bold text-center mb-5 text-white">Editar un Reino</h1>
 
-  <form th:action="@{/empresas/actualizar/{id} (id = ${empresa.id})}" method="post" class="needs-validation bg-white p-4 rounded shadow-lg" novalidate>
+  <form th:action="@{/empresas/actualizar/{id} (id = ${empresa.id})}" th:method="put" class="needs-validation bg-white p-4 rounded shadow-lg" novalidate>
     <div class="form-group mb-3">
       <label class="fw-bolder form-label" for="nombre" required
       >Nombre:</label
