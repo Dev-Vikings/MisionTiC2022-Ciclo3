@@ -31,7 +31,7 @@
   <body class="min-vh-100 bg-dark">
     <!-- JavaScript Bundle with Popper -->
     <div class="container m-5 mx-auto">
-      <h1 class="fw-bold text-center mb-5 text-white">Editar un Vikingo</h1>
+      <h1 class="fw-bold text-center mb-5 text-white">Editar Transaccion</h1>
 
       <form
         th:action="@{/transacciones/actualizar/{id} (id = ${transaccion.id})}"
@@ -64,7 +64,7 @@
         </div>
 
         <div class="form-group mb-3">
-          <label for="empleado" class="fw-bolder">Empleado: </label>
+          <label for="empleado" class="fw-bolder">Vikingo: </label>
           <select
             id="empleado"
             class="form-select"
