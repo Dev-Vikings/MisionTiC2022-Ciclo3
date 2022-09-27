@@ -30,7 +30,7 @@
 <div class="container m-5 mx-auto">
   <h1 class="fw-bold text-center mb-5 text-white">Agregar un nuevo Vikingo</h1>
 
-  <form th:action="@{/empleados}" method="post" class="needs-validation bg-white p-4 rounded shadow-lg" novalidate>
+  <form th:action="@{/empleados}" th:method="post" class="needs-validation bg-white p-4 rounded shadow-lg" novalidate>
     <div class="form-group mb-3">
       <label class="fw-bolder form-label" for="nombre" required
       >Nombre:</label
@@ -65,15 +65,13 @@
 
 
     <div class="form-group mb-3">
-      <label class="fw-bolder" for="reino_id">Reino:</label>
-      <input
-              type="number"
-              class="form-control"
-              id="reino_id"
-              placeholder="Kateggat"
-              th:field="${empleado.empresa.id}"
-      />
+      <label for="empresa" class="form-label fw-bolder">Reino</label>
+      <select id="empresa" class="form-select" th:field="*{empleado.empresa.id}">
+        <option  th:each="empresa : ${empresas}" th:value="${empresa.id}" th:text=${empresa.nombre}></option>
+      </select>
     </div>
+
+
 
     <button type="submit" class="btn btn-warning fw-bold">Agregar</button>
   </form>

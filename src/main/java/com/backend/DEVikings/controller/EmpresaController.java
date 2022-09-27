@@ -27,6 +27,8 @@ public class EmpresaController {
     private String verEmpresa(Model model,@AuthenticationPrincipal OidcUser principal){
         if (principal != null) {
             model.addAttribute("empresas", empresaService.verEmpresa());
+            model.addAttribute("nick", principal.getClaims().get("nickname"));
+
             return "empresas";
         }
         webController.index(model,principal);

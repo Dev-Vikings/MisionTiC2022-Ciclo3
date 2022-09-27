@@ -22,7 +22,6 @@ public class WebController {
     @GetMapping("/")
     public String index(Model model, @AuthenticationPrincipal OidcUser principal) {
         if (principal != null) {
-            System.out.println(principal);
             this.userService.saveUser(principal.getClaims());
             model.addAttribute("nick", principal.getClaims().get("nickname"));
 
