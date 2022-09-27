@@ -48,6 +48,10 @@
       </button>
       <div class="collapse navbar-collapse" id="navbarSupportedContent">
         <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+
+<!--          -->
+          <div th:if="${#strings.equals(empleado.rol, 'Rey')}"  class="navbar-nav me-auto mb-2 mb-lg-0">
+<!--          -->
           <li class="nav-item">
             <a class="nav-link" href="/empleados"
             >Vikingos</a
@@ -56,6 +60,10 @@
           <li class="nav-item">
             <a class="nav-link" href="/empresas">Reinos</a>
           </li>
+<!---->
+          </div>
+<!--          <div th:unless="${empleado.rol}=='Rey'"> </div>-->
+<!--          -->
           <li class="nav-item">
             <a class="nav-link active" aria-current="page" href="/transacciones">Transacciones</a>
           </li>
@@ -74,7 +82,6 @@
   <h1 class="text-center my-5 fw-bold">
     Sistema de Gestion de Transacciones de Dinero
   </h1>
-
   <div class="d-flex justify-content-between align-content-center mb-5">
     <h2>Gestiona los ingresos y egresos diarios</h2>
 
@@ -91,7 +98,13 @@
         <th scope="col">Concepto</th>
         <th scope="col">Monto</th>
         <th scope="col">Vikingo</th>
-        <th scope="col">Acciones</th>
+<!--        -->
+
+
+        <th scope="col" th:if="${#strings.equals(empleado.rol, 'Rey')}">Acciones</th>
+
+
+<!--        -->
       </tr>
       </thead>
       <tbody>
@@ -100,10 +113,19 @@
         <td th:text="${transaccion.concepto}"></td>
         <td th:text="${transaccion.monto}"></td>
         <td th:text="${transaccion.empleado.nombre}"></td>
-        <td>
+
+<!--        -->
+
+
+          <!--        -->
+        <td th:if="${#strings.equals(empleado.rol, 'Rey')}">
           <a class="btn btn-success" th:href="@{/transacciones/editar/{id} (id = ${transaccion.id})}">Editar</a>
           <a class="btn btn-danger" th:href="@{/transacciones/borrar/{id} (id = ${transaccion.id})}">Borrar</a>
         </td>
+<!--        -->
+
+
+<!--        -->
       </tr>
       </tbody>
     </table>

@@ -44,6 +44,7 @@ public class TransaccionController {
             model.addAttribute("empresas",empresaService.verEmpresa());
 
 
+
             return "transacciones";
     }
         webController.index(model,principal);
